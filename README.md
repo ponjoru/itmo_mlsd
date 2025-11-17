@@ -10,6 +10,7 @@
 git clone https://github.com/ponjoru/itmo_mlsd.git
 pip install -r requriements-dev.txt
 ```
+
 ## hw_1
 
 ### Что сделано
@@ -17,3 +18,10 @@ pip install -r requriements-dev.txt
     - [x] Линтер и Форматтер (ruff)
     - [x] pre-commit
     - [x] README.md с основной информацией о проекте
+- [x] Дизайн документ `docs/ml_system_design_doc.md`
+    - [x] Зачем идем в разработку продукта?
+    - [x] Бизнес-требования и ограничения
+    - [x] Что входит в скоуп проекта/итерации, что не входит
+    - [x] Предпосылки решения
+    - [x] Постановка задачи
+    - [x] Блок-схема решения
