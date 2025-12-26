@@ -12,5 +12,6 @@ repos:
       - id: check-yaml                # check yaml correctness
       - id: check-merge-conflict
       - id: check-added-large-files
+        args: ['--maxkb=2048']
       - id: trailing-whitespace
       - id: end-of-file-fixer
