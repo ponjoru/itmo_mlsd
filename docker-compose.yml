@@ -1,0 +1,22 @@
+---
+# used for development/testing
+version: '3'
+services:
+  ps_inference:
+    image: ps_inference
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.inference
+      shm_size: '10gb'
+    shm_size: '10gb'
+    volumes:
+      - ${DATA_PATH}:/data
+      - ${OUTPUTS_PATH}:/outputs
+    command: bash -c "
+        python3 src/demo.py --video /data/background_video_people_walking_1080P.mp4 --config /app/configs/camera1.yaml &&
+        python3 src/demo.py --video /data/intrusion_1.mp4 --config /app/configs/camera2.yaml
+      "
+    ports:
+      - 9111:8888
+    env_file:
+      - .env
