@@ -1,0 +1,115 @@
+model:
+  # Path to YOLO ONNX model (YOLOv11n COCO pretrained)
+  weights: "weights/yolo11n.onnx"
+
+  # Model input image size
+  imgsz: 640
+
+  # Detection confidence threshold
+  conf_threshold: 0.25
+
+  # NMS IoU threshold
+  iou_threshold: 0.45
+
+  # Target classes to detect (0 = person in COCO)
+  target_classes: [0]
+
+  # Device: 'cpu' or 'cuda'
+  device: "cpu"
+
+# Tracker Configuration (ByteTrack)
+tracker:
+  # High confidence detection threshold for tracking
+  track_thresh: 0.45
+
+  # Number of frames to keep lost tracks
+  track_buffer: 25
+
+  # IoU threshold for matching tracks to detections
+  match_thresh: 0.8
+
+  # Minimum bounding box area (filter small detections)
+  min_box_area: 100
+
+# Zone Configuration
+zones:
+  - name: "Restricted Area 1"
+    polygon: [[0, 720], [1920, 720], [1920, 1080], [0, 1080]] # list of [x, y] coordinates in pixels
+    color: [0, 0, 255]  # Red (BGR format)
+
+# Event Generation Configuration
+events:
+  # Minimum number of consecutive detections in zone to trigger alarm
+  min_detections_for_alarm: 5
+
+  # Cooldown period (frames) before same track can trigger another alarm
+  alarm_cooldown: 30
+
+  # Event types to generate
+  generate_entry_events: true
+  generate_exit_events: true
+  generate_dwelling_events: true
+
+  # Minimum dwelling time (frames) to consider as "dwelling"
+  min_dwelling_time: 50
+
+# Visualization Configuration
+visualization:
+  # Show bounding boxes
+  show_boxes: true
+
+  # Show track IDs
+  show_track_ids: true
+
+  # Show track trails (trajectory)
+  show_trails: true
+
+  # Trail length (number of points)
+  trail_length: 30
+
+  # Box color for tracked objects (BGR)
+  box_color: [0, 255, 0]  # Green
+
+  # Box thickness
+  box_thickness: 2
+
+  # Font scale for text
+  font_scale: 0.6
+
+  # Font thickness
+  font_thickness: 2
+
+  # Show zones on video
+  show_zones: true
+
+  # Zone opacity (0.0-1.0)
+  zone_opacity: 0.3
+
+  # Info panel configuration
+  info_panel:
+    width: 300
+    height: 200
+    background_color: [0, 0, 0]  # Black
+    text_color: [255, 255, 255]  # White
+    font_scale: 0.5
+    font_thickness: 1
+
+# Output Configuration
+output:
+  # Save output video
+  save_video: true
+
+  # Output video path (if not specified, will use input name + _output.mp4)
+  output_path: '/outputs/output_camera1.mp4'
+
+  # Output video codec (e.g., 'mp4v', 'avc1', 'XVID')
+  codec: "mp4v"
+
+  # Output video FPS (if null, use input video FPS)
+  fps: null
+
+  # Save events to JSON file
+  save_events: false
+
+  # Events JSON output path
+  events_path: null
